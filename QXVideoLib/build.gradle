@@ -1,0 +1,44 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+
+    defaultConfig {
+        minSdkVersion 10
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+    }
+    lintOptions {
+        abortOnError false
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_6
+        targetCompatibility JavaVersion.VERSION_1_6
+    }
+}
+
+//混淆jar包
+task proguard(type: proguard.gradle.ProGuardTask, dependsOn: "build") {
+//  输入路径
+    injars "build/intermediates/bundles/debug/classes.jar"
+//  输出路径
+    outjars 'build/outputs/jar/yunzhixun_video_SDK_v1000.2.0.3_L.0_release.jar'
+//  添加配置信息
+    configuration 'proguard-rules.pro'
+}
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //    compile files('android-support-v4.jar')
+    //    compile files('httpmime-4.1.1.jar')
+    testCompile 'junit:junit:4.12'
+}

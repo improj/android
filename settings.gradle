@@ -1,0 +1,1 @@
+include ':app', ':com.qxtcp', ':QXVideoLib', ':QXIMLib', ':Android_Demo'

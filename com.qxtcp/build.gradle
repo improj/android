@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+//混淆jar包
+task proguard(type: proguard.gradle.ProGuardTask, dependsOn: "build") {
+//  输入路径
+    injars "build/intermediates/bundles/debug/classes.jar"
+//  输出路径
+    outjars 'build/outputs/jar/yunzhixun_tcp_SDK_ver3.0.6.4_debug.jar'
+//  添加配置信息
+    configuration 'proguard-rules.pro'
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+}
